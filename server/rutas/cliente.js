@@ -62,6 +62,38 @@ app.get('/cliente', (req, res) => {
 
 });
 
+app.put('/cliente/update/:rut', (req, res) => {
+    let rut = req.params.rut;
+    let body = req.body;
+    let query = `update maecli set cl_nomcli = '${body.nombre}' where cl_rutcli = ${rut}`;
+
+    db.ejecutaSql(query, (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err: err
+            });
+        }
+
+        if (data.rowsAffected[0] === 0) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'No existe el cliente'
+                }
+            });
+        }
+
+
+        res.json({
+            ok: true,
+            message: 'cliente actualizado',
+            lineasAfectadas: data.rowsAffected[0]
+        });
+    });
+
+})
+
 
 
 module.exports = app;
