@@ -2,6 +2,7 @@ require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser'); //es para parsear datos de la peticion retornando un json
+const cors = require('cors');
 
 
 
@@ -12,8 +13,7 @@ app.use(bodyParser.json());
 
 
 //Cross-Origin Read Blocking (CORB) blocked cross-origin, nueva seguridad de chromme
-//app.use(cors()); esto hay que instalarlo
-
+app.use(cors());
 
 //Configuracion global de rutas
 app.use(require('./rutas/index'));

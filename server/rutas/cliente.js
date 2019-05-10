@@ -33,9 +33,9 @@ app.get('/cliente/:rut', (req, res) => {
 
 });
 
-app.get('/cliente', (req, res) => {
+app.get('/clientes', (req, res) => {
 
-    let consulta = `select * from maecli`;
+    let consulta = `select cl_rutcli, cl_nomcli from maecli`;
 
     db.ejecutaSql(consulta, (err, data) => {
         if (err) {
